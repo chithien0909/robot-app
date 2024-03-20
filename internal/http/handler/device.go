@@ -30,15 +30,15 @@ func (d *deviceHandlerImpl) Find(c *gin.Context) {
 	body := dto.FindDeviceReq{}
 
 	if err := c.ShouldBind(&body); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": err.Error(),
+		c.JSON(http.StatusBadRequest, dto.Response{
+			Message: err.Error(),
 		})
 		return
 	}
 
 	if err := d.validate.Validate(body); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"message": err.Error(),
+		c.JSON(http.StatusBadRequest, dto.Response{
+			Message: err.Error(),
 		})
 		return
 	}
@@ -52,17 +52,17 @@ func (d *deviceHandlerImpl) Find(c *gin.Context) {
 	devices, total, err := d.repo.Device().Find(c, query)
 
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"message": err.Error(),
+		c.JSON(http.StatusInternalServerError, dto.Response{
+			Message: err.Error(),
 		})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Success",
-		"data":    devices,
-		"total":   total,
-		"page":    pagination.Page,
-		"limit":   pagination.Limit,
+	c.JSON(http.StatusOK, dto.ResponseWithPagination{
+		Message: "Success",
+		Data:    devices,
+		Total:   total,
+		Page:    pagination.Page,
+		Limit:   pagination.Limit,
 	})
 }

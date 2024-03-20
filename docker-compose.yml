@@ -15,8 +15,6 @@ services:
     image: postgres:14
     container_name: database
     restart: on-failure
-    ports:
-      - "5432:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
     environment:
@@ -24,4 +22,3 @@ services:
       - POSTGRES_PASSWORD=test
       - POSTGRES_DB=robot-app
       - TZ=Asia/Ho_Chi_Minh
-      - POSTGRES_HOST_AUTH_METHOD=trust
