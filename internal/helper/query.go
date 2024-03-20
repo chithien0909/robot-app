@@ -2,7 +2,6 @@ package helper
 
 import (
 	"fmt"
-	"github.com/fatih/structs"
 	"golang.org/x/net/html"
 	"robot-app/internal/model"
 	"strconv"
@@ -35,26 +34,6 @@ func BuildSearch(q string, searchFields []string) (filters []*model.Filter) {
 			Value:  strings.ToLower(fmt.Sprint("%" + html.EscapeString(q) + "%")),
 			Method: "LIKE",
 		})
-	}
-	return filters
-}
-
-func BuildFiltersFromReq(target interface{}) (filters []*model.Filter) {
-	s := structs.New(target)
-	for _, f := range s.Fields() {
-		name := s.Field(f.Name())
-		filterTag := name.Tag("filter")
-		op := name.Tag("op")
-		if op == "" {
-			op = "="
-		}
-		if !f.IsZero() && filterTag != "" {
-			filters = append(filters, &model.Filter{
-				Key:    filterTag,
-				Method: op,
-				Value:  f.Value(),
-			})
-		}
 	}
 	return filters
 }

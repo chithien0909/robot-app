@@ -4,11 +4,10 @@
 
 1. Install Docker and Docker Compose
 
-2. Run app
+2. Run app with docker
     ```base
     docker-compose up -d
     ```
-   
 
 ## Source Tree
 
