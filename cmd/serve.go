@@ -27,6 +27,7 @@ func setupServer() server.Server {
 	db, err := database.New(config.GetDatabaseConfig().DbUrl)
 	if err != nil {
 		log.Printf("Failed database.New: %s\n", err.Error())
+		panic(err)
 	}
 
 	database.Migrate(db)
