@@ -62,17 +62,18 @@
 
 ## Thư viện package được sử dụng
 1. cobra: Xử lí command
-2. gorm: là ORM, kết nối thao tác với Postgres
+2. gorm: là ORM, kết nối thao tác với Postgres, thông qua các function được build sẵn thay cho raw sql
 3. gin: http web framework
 4. viper: load config file from .env, yaml
-5. validator: Giúp validate struct
+5. validator: validate struct request
 
 
 ## Các bước viết api mới
 1. Đọc requirement và làm rõ (có thể hỏi lại, không ngầm hiểu các vấn đề)
-  - Yêu cầu input, output
+  - Các yêu cầu về input, output
   - Các tính năng của api
   - Các fields (thông số), 1:1 hay 1:n
+  - Logic business
 2. Setup môi trường
   - Chọn ngôn ngữ, các công nghệ
 3. Thiết kế database

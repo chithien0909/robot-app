@@ -13,7 +13,6 @@ type Sort struct {
 }
 
 type Query struct {
-	Q            string
 	Pagination   *Pagination
 	Sort         *Sort
 	Filters      []*Filter
@@ -24,10 +23,6 @@ type Pagination struct {
 	Page   int
 	Limit  int
 	Offset int
-}
-
-func (q *Query) SetQ(keyword string) {
-	q.Q = keyword
 }
 
 func (q *Query) AddFilter(f *Filter) {

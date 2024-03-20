@@ -47,7 +47,7 @@ func (d *deviceHandlerImpl) Find(c *gin.Context) {
 
 	pagination := helper.BuildPagination(body.Page, body.Limit)
 
-	query := helper.BuildQuery(body.Q, filters, helper.BuildSortFromString(body.Sort), pagination)
+	query := helper.BuildQuery(filters, helper.BuildSortFromString(body.Sort), pagination)
 
 	devices, total, err := d.repo.Device().Find(c, query)
 

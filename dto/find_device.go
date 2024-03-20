@@ -8,7 +8,6 @@ import (
 )
 
 type FindDeviceReq struct {
-	Q                  string  `form:"q"`
 	Sort               string  `form:"sort" validate:"omitempty,enum=id;created_at;updated_at;name;description;model;version;production_cost;production_date;color;camera;battery_size;battery_life;charging_time;charging_type;rating;sensor_x;width;height;weight;material;brand;display_size;gps;microphone;number_of_processors;warranty;speaker;resolution"`
 	Limit              int     `form:"limit"`
 	Page               int     `form:"page"`
@@ -217,7 +216,7 @@ func (f FindDeviceReq) GetFilters() (filters []*model.Filter) {
 	}
 
 	if f.Resolution != nil {
-		filters = append(filters, helper.FilterInString(*f.Resolution, "resolution"))
+		filters = append(filters, helper.FilterInInt(*f.Resolution, "resolution"))
 	}
 
 	return filters

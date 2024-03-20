@@ -26,9 +26,6 @@ func NewDeviceRepository(db *gorm.DB) DeviceRepository {
 func (d *deviceRepositoryImpl) Find(ctx context.Context, query *model.Query) (devices []*model.Device, total int64, err error) {
 
 	fields, values := helper.BuildFilters(query.Filters)
-	searchFilters := helper.BuildSearch(query.Q, query.SearchFields)
-
-	searchFields, searchValues := helper.BuildFilters(searchFilters)
 
 	tx := d.db.Model(&model.Device{}).Debug().
 		WithContext(ctx).
@@ -36,10 +33,6 @@ func (d *deviceRepositoryImpl) Find(ctx context.Context, query *model.Query) (de
 
 	if query.Sort != nil {
 		tx.Order(fmt.Sprintf("%s %s", query.Sort.Key, query.Sort.SortBy))
-	}
-
-	if searchFilters != nil {
-		tx = tx.Where(strings.Join(searchFields, " OR "), searchValues...)
 	}
 
 	if err := tx.Count(&total).Error; err != nil {

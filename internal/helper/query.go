@@ -38,10 +38,9 @@ func BuildSearch(q string, searchFields []string) (filters []*model.Filter) {
 	return filters
 }
 
-func BuildQuery(q string, filters []*model.Filter, sort *model.Sort, pagination *model.Pagination) *model.Query {
+func BuildQuery(filters []*model.Filter, sort *model.Sort, pagination *model.Pagination) *model.Query {
 	query := &model.Query{}
 	//Search by keyword
-	query.SetQ(q)
 	//Build Filters
 	query.SetFilters(filters)
 	//Build sort
